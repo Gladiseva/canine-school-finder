@@ -3,7 +3,7 @@ import {School} from '../school';
 import {SchoolService} from '../school.service';
 
 @Component({
-  selector: 'app-dashboard-cards',
+  selector: 'csf-dashboard-cards',
   templateUrl: './school-cards.component.html',
   styleUrls: ['./school-cards.component.scss']
 })

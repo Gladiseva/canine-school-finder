@@ -14,14 +14,18 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {LayoutModule} from '@angular/cdk/layout';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatInputModule} from '@angular/material/input';
 
 import {HttpClientModule} from '@angular/common/http';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './in-memory-data.service';
 import {SchoolSearchComponent} from './school-search/school-search.component';
 import {FormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -40,13 +44,17 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
     MatIconModule,
     MatButtonModule,
     MatChipsModule,
+    MatInputModule,
     LayoutModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, {dataEncapsulation: false}
     ),
     FormsModule,
-    Ng2SearchPipeModule
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    Ng2SearchPipeModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

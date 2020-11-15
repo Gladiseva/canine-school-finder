@@ -1,8 +1,24 @@
+@import "src/variables";
+
 .grid-container {
-  margin: 100px;
+  margin: 10px;
   justify-content: center;
+
+  @media(min-width: $sm-breakpoint) {
+    margin-left: 70px;
+    margin-right: 70px;
+  }
 }
 
 #search-box {
   width: 70%;
 }
+
+.basic-card {
+  background-color: #EFE5FD;
+}
+
+.example-full-width {
+  width: 100%;
+}
+

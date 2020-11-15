@@ -1,14 +1,39 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Find school that suits you!</h1>
-  <mat-chip-list aria-label="Fish selection">
-    <mat-chip>One fish</mat-chip>
-    <mat-chip>Two fish</mat-chip>
-    <mat-chip color="primary" selected>Primary fish</mat-chip>
-    <mat-chip color="accent" selected>Accent fish</mat-chip>
-  </mat-chip-list>
-  <input #searchBox id="search-box" (input)="search(searchBox.value)"/>
+  <form class="school-search-form">
+    <!--<mat-card class="basic-card"><h1 class="mat-h1">Find school that suits you!</h1>-->
+      <mat-card class="input-card">
+        <mat-card-title>Filters</mat-card-title>
+        <mat-card-content>
+          <mat-form-field class="example-full-width">
+            <mat-label><h3 class="mat-h3">Location</h3></mat-label>
+            <input #searchBox matInput placeholder="Ex. Zurich" value="Bern" [formControl]="control"
+                   [matAutocomplete]="auto" (input)="search(searchBox.value)">
+            <button mat-button matSuffix>
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-form-field>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let street of filteredLocations | async" [value]="street">
+              {{street}}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-chip-list aria-label="School selection">
+            <mat-chip color="primary" selected>All</mat-chip>
+            <mat-chip>Puppy classes</mat-chip>
+            <mat-chip>Behaviour correction</mat-chip>
+            <mat-chip>Agility</mat-chip>
+            <mat-chip>IPO</mat-chip>
+            <mat-chip>OBD</mat-chip>
+            <mat-chip>SAR</mat-chip>
+            <mat-chip>BH</mat-chip>
+          </mat-chip-list>
+        </mat-card-content>
+      </mat-card>
+ <!--   </mat-card>-->
+  </form>
+
   <ul class="search-result">
-    <li *ngFor="let school of schools$ | async">
+    <li *ngFor="let school of filteredSchools$ | async">
       {{school.title}}
     </li>
   </ul>
