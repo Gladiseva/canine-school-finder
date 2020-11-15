@@ -1,0 +1,16 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Find school that suits you!</h1>
+  <mat-chip-list aria-label="Fish selection">
+    <mat-chip>One fish</mat-chip>
+    <mat-chip>Two fish</mat-chip>
+    <mat-chip color="primary" selected>Primary fish</mat-chip>
+    <mat-chip color="accent" selected>Accent fish</mat-chip>
+  </mat-chip-list>
+  <input #searchBox id="search-box" (input)="search(searchBox.value)"/>
+  <ul class="search-result">
+    <li *ngFor="let school of schools$ | async">
+      {{school.title}}
+    </li>
+  </ul>
+</div>
+
