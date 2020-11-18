@@ -15,6 +15,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {LayoutModule} from '@angular/cdk/layout';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatInputModule} from '@angular/material/input';
+import {MatListModule} from '@angular/material/list';
 
 import {HttpClientModule} from '@angular/common/http';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
@@ -45,6 +46,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatButtonModule,
     MatChipsModule,
     MatInputModule,
+    MatListModule,
     LayoutModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(

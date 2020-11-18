@@ -1,19 +1,46 @@
 <div class="grid-container">
   <mat-card class="school-cards">
     <h1 class="mat-h1">Available Schools</h1>
-    <mat-grid-list cols="3" rowHeight="300px">
+    <mat-grid-list cols="3" rowHeight="600px">
       <mat-grid-tile *ngFor="let school of schools">
         <mat-card class="dashboard-card">
           <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
             <mat-card-title>
               {{school.title}}
             </mat-card-title>
           </mat-card-header>
           <mat-card-content class="dashboard-card-content">
-            <img mat-card-image [src]=school.image alt="Schools photo">
             <p>
               {{school.description}}
             </p>
+            <mat-list>
+              <div mat-subheader>Sort of training:</div>
+              <mat-list-item>
+                <mat-icon mat-list-icon>pets</mat-icon>
+                <div mat-line>{{school.sortOfTraining}}</div>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+              <div mat-subheader>Prices:</div>
+              <mat-list-item>
+                <mat-icon mat-list-icon>euro_symbol</mat-icon>
+                <div mat-line>{{school.price}}</div>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+              <div mat-subheader>Distance from you:</div>
+              <mat-list-item>
+                <mat-icon mat-list-icon>location_on</mat-icon>
+                <div mat-line>distance</div>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+              <div mat-subheader>Contacts</div>
+              <mat-list-item>
+                <mat-icon mat-list-icon>call</mat-icon>
+                <div mat-line>phone</div>
+                <mat-icon mat-list-icon>email</mat-icon>
+                <div mat-line>email</div>
+              </mat-list-item>
+            </mat-list>
           </mat-card-content>
         </mat-card>
       </mat-grid-tile>
