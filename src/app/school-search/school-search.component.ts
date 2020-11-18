@@ -1,12 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {School} from '../school';
 import {SchoolService} from '../school.service';
+import {LocationService} from '../location.service';
 import {FormControl} from '@angular/forms';
 
 import {Observable, Subject, Subscription} from 'rxjs';
 
 import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from 'rxjs/operators';
-import * as _ from 'lodash';
+import {Location} from '../location';
+import {SchoolType} from '../school-type';
+import {SchoolTypeService} from '../school-type.service';
 
 @Component({
   selector: 'csf-school-search',
@@ -18,11 +21,16 @@ export class SchoolSearchComponent implements OnInit, OnDestroy {
   private searchTerms = new Subject<string>();
 
   control = new FormControl();
-  locations: string[] = [];
+  locations: Location[] = [];
+  schoolTypes: SchoolType[] = [];
   filteredLocations: Observable<string[]>;
   private subscription = new Subscription();
 
-  constructor(private schoolService: SchoolService) {
+  constructor(
+    private schoolService: SchoolService,
+    private locationService: LocationService,
+    private schoolTypeService: SchoolTypeService,
+  ) {
   }
 
   search(term: string): void {
@@ -30,10 +38,8 @@ export class SchoolSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const subscription = this.schoolService.getSchools().subscribe(schools => {
-      this.locations = _.uniq(schools.map(school => school.location));
-    });
-    this.subscription.add(subscription);
+    this.getLocations();
+    this.getSchoolTypes();
 
     this.filteredLocations = this.control.valueChanges.pipe(
       startWith(''),
@@ -58,10 +64,20 @@ export class SchoolSearchComponent implements OnInit, OnDestroy {
 
   private _filter(value: string): string[] {
     const filterValue = this._normalizeValue(value);
-    return this.locations.filter(location => this._normalizeValue(location).includes(filterValue));
+    return this.locations.map(location => location.name).filter(location => this._normalizeValue(location).includes(filterValue));
   }
 
   private _normalizeValue(value: string): string {
     return value.toLowerCase().replace(/\s/g, '');
+  }
+
+  getLocations(): void {
+    this.locationService.getLocations()
+      .subscribe(locations => this.locations = locations);
+  }
+
+  getSchoolTypes(): void {
+    this.schoolTypeService.getSchoolTypes()
+      .subscribe(types => this.schoolTypes = types);
   }
 }

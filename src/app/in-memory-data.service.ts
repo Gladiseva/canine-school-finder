@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {InMemoryDbService} from 'angular-in-memory-web-api';
 import {School} from './school';
 import {Location} from './location';
+import {SchoolType} from './school-type';
 
 @Injectable({
   providedIn: 'root',
@@ -64,6 +65,16 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 2, name: 'Zurich'},
       {id: 3, name: 'Bern'},
     ];
-    return {schools, locations};
+    const schoolTypes: SchoolType[] = [
+      {id: 1, name: 'All', state: true},
+      {id: 2, name: 'Puppy classes', state: false},
+      {id: 3, name: 'Behaviour consultation', state: false},
+      {id: 4, name: 'Agility', state: false},
+      {id: 5, name: 'IPO', state: false},
+      {id: 6, name: 'OBD', state: false},
+      {id: 7, name: 'SAR', state: false},
+      {id: 8, name: 'BH', state: false},
+    ];
+    return {schools, locations, schoolTypes};
   }
 }

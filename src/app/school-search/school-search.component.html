@@ -15,15 +15,10 @@
               {{street}}
             </mat-option>
           </mat-autocomplete>
-          <mat-chip-list aria-label="School selection">
-            <mat-chip color="primary" selected>All</mat-chip>
-            <mat-chip>Puppy classes</mat-chip>
-            <mat-chip>Behaviour consultations</mat-chip>
-            <mat-chip>Agility</mat-chip>
-            <mat-chip>IPO</mat-chip>
-            <mat-chip>OBD</mat-chip>
-            <mat-chip>SAR</mat-chip>
-            <mat-chip>BH</mat-chip>
+          <mat-chip-list  multiple id="chipList" [selectable]="true" >
+            <mat-chip *ngFor="let schoolType of schoolTypes" [selected]="schoolType.state" (click)="schoolType.state=!schoolType.state" >
+              {{schoolType.name}}
+            </mat-chip>
           </mat-chip-list>
         </mat-card-content>
       </mat-card>
