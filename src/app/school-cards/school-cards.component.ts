@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {School} from '../school';
-import {SchoolService} from '../school.service';
+import {School} from '../interfaces/school';
+import {SchoolService} from '../services/school.service';
 
 @Component({
   selector: 'csf-dashboard-cards',

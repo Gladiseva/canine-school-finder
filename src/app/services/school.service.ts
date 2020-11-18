@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {School} from './school';
+import {School} from '../interfaces/school';
 import {Observable, of} from 'rxjs';
 import {MessageService} from './message.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';

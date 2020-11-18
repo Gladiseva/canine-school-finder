@@ -1,15 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {School} from '../school';
-import {SchoolService} from '../school.service';
-import {LocationService} from '../location.service';
+import {School} from '../interfaces/school';
+import {SchoolService} from '../services/school.service';
+import {LocationService} from '../services/location.service';
 import {FormControl} from '@angular/forms';
 
 import {Observable, Subject, Subscription} from 'rxjs';
 
 import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from 'rxjs/operators';
-import {Location} from '../location';
-import {SchoolType} from '../school-type';
-import {SchoolTypeService} from '../school-type.service';
+import {Location} from '../interfaces/location';
+import {SchoolType} from '../interfaces/school-type';
+import {SchoolTypeService} from '../services/school-type.service';
 
 @Component({
   selector: 'csf-school-search',

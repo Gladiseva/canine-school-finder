@@ -1,27 +1,28 @@
 <div class="grid-container">
-      <mat-card class="input-card">
-        <mat-card-title>Find school that suits you!</mat-card-title>
-        <mat-card-content>
-          <mat-form-field class="example-full-width">
-            <mat-label><h3 class="mat-h3">Location</h3></mat-label>
-            <input #searchBox matInput placeholder="Ex. Zurich" value="Bern" [formControl]="control"
-                   [matAutocomplete]="auto" (input)="search(searchBox.value)">
-            <button mat-button matSuffix>
-              <mat-icon>search</mat-icon>
-            </button>
-          </mat-form-field>
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let street of filteredLocations | async" [value]="street">
-              {{street}}
-            </mat-option>
-          </mat-autocomplete>
-          <mat-chip-list  multiple id="chipList" [selectable]="true" >
-            <mat-chip *ngFor="let schoolType of schoolTypes" [selected]="schoolType.state" (click)="schoolType.state=!schoolType.state" >
-              {{schoolType.name}}
-            </mat-chip>
-          </mat-chip-list>
-        </mat-card-content>
-      </mat-card>
+  <mat-card class="input-card">
+    <mat-card-title>Find school that suits you!</mat-card-title>
+    <mat-card-content>
+      <mat-form-field class="example-full-width">
+        <mat-label><h3 class="mat-h3">Location</h3></mat-label>
+        <input #searchBox matInput placeholder="Ex. Zurich" value="Bern" [formControl]="control"
+               [matAutocomplete]="auto" (input)="search(searchBox.value)">
+        <button mat-button matSuffix>
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let street of filteredLocations | async" [value]="street">
+          {{street}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-chip-list multiple id="chipList" [selectable]="true">
+        <mat-chip *ngFor="let schoolType of schoolTypes" [selected]="schoolType.state"
+                  (click)="schoolType.state=!schoolType.state">
+          {{schoolType.name}}
+        </mat-chip>
+      </mat-chip-list>
+    </mat-card-content>
+  </mat-card>
 
 
   <ul class="search-result">

@@ -19,10 +19,9 @@ import {MatListModule} from '@angular/material/list';
 
 import {HttpClientModule} from '@angular/common/http';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
-import {InMemoryDataService} from './in-memory-data.service';
+import {InMemoryDataService} from './services/in-memory-data.service';
 import {SchoolSearchComponent} from './school-search/school-search.component';
-import {FormsModule} from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
@@ -61,4 +60,5 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

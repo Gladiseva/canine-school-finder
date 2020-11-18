@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {MessageService} from './message.service';
 import {Observable, of} from 'rxjs';
-import {Location} from './location';
 import {catchError, tap} from 'rxjs/operators';
+import {SchoolType} from '../interfaces/school-type';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LocationService {
-  private locationUrl = 'api/locations';
+export class SchoolTypeService {
+  private schoolTypeUrl = 'api/schoolTypes';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -20,16 +20,16 @@ export class LocationService {
     private messageService: MessageService) {
   }
 
-  getLocations(): Observable<Location []> {
-    return this.http.get<Location[]>(this.locationUrl)
+  getSchoolTypes(): Observable<SchoolType []> {
+    return this.http.get<SchoolType[]>(this.schoolTypeUrl)
       .pipe(
-        tap(_ => this.log('fetched locations')),
-        catchError(this.handleError<Location[]>('getLocations', []))
+        tap(_ => this.log('fetched school types')),
+        catchError(this.handleError<SchoolType[]>('getSchoolTypes', []))
       );
   }
 
   private log(message: string): void {
-    this.messageService.add(`LocationService: ${message}`);
+    this.messageService.add(`SchoolTypeService: ${message}`);
   }
 
   private handleError<T>(operation = 'operation', result?: T): any {
