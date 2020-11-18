@@ -4,4 +4,5 @@ export interface School {
   description: string;
   location: string;
   sortOfTraining: string;
+  image: string;
 }

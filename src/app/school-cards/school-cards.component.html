@@ -1,19 +1,22 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Available Schools</h1>
-  <mat-grid-list cols="4" rowHeight="180px">
-    <mat-grid-tile *ngFor="let school of schools">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            {{school.title}}
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>
-            <mat-card-content>{{school.description}}</mat-card-content>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+  <mat-card class="school-cards">
+    <h1 class="mat-h1">Available Schools</h1>
+    <mat-grid-list cols="3" rowHeight="300px">
+      <mat-grid-tile *ngFor="let school of schools">
+        <mat-card class="dashboard-card">
+          <mat-card-header>
+            <mat-card-title>
+              {{school.title}}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="dashboard-card-content">
+            <img mat-card-image [src]=school.image alt="Schools photo">
+            <p>
+              {{school.description}}
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
 </div>
