@@ -18,11 +18,14 @@ import {SchoolTypeService} from '../services/school-type.service';
 })
 export class SchoolSearchComponent implements OnInit, OnDestroy {
   filteredSchools$: Observable<School[]>;
-  private searchTerms = new Subject<string>();
+  term: string;
 
   control = new FormControl();
   locations: Location[] = [];
   schoolTypes: SchoolType[] = [];
+  selectedSchoolType: SchoolType = {
+    id: 1, name: 'All', state: true
+  };
   filteredLocations: Observable<string[]>;
   private subscription = new Subscription();
 
@@ -33,8 +36,8 @@ export class SchoolSearchComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  search(term: string): void {
-    this.searchTerms.next(term);
+  search(): void {
+    this.filteredSchools$ = this.schoolService.searchSchools(this.term, this.selectedSchoolType);
   }
 
   ngOnInit(): void {
@@ -43,19 +46,14 @@ export class SchoolSearchComponent implements OnInit, OnDestroy {
 
     this.filteredLocations = this.control.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value))
-    );
-
-    this.filteredSchools$ = this.searchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
       debounceTime(300),
 
       // ignore new term if same as previous term
       distinctUntilChanged(),
-
-      // switch to new search observable each time the term changes
-      switchMap((term: string) => this.schoolService.searchSchools(term)),
+      map(value => this._filter(value))
     );
+
   }
 
   ngOnDestroy(): void {
@@ -79,5 +77,15 @@ export class SchoolSearchComponent implements OnInit, OnDestroy {
   getSchoolTypes(): void {
     this.schoolTypeService.getSchoolTypes()
       .subscribe(types => this.schoolTypes = types);
+  }
+
+  updateSelectedSchoolType(schoolType: SchoolType): void {
+    this.schoolTypes.forEach(type => type.state = false);
+    schoolType.state = !schoolType.state;
+    this.selectedSchoolType = schoolType;
+  }
+
+  getSelectedSchoolType(): SchoolType {
+    return this.selectedSchoolType;
   }
 }

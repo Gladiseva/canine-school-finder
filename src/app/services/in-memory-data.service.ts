@@ -15,7 +15,7 @@ export class InMemoryDataService implements InMemoryDbService {
         title: 'Aegeri Dogs',
         description: 'sometimes it is gonna be a desc',
         location: 'zug',
-        sortOfTraining: 'puppyClass',
+        sortOfTraining: 'Puppy classes',
         image: 'assets/images/first.jpg',
         price: 25
       },
@@ -88,6 +88,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 6, name: 'OBD', state: false},
       {id: 7, name: 'SAR', state: false},
       {id: 8, name: 'BH', state: false},
+      {id: 8, name: 'Social walks', state: false},
     ];
     return {schools, locations, schoolTypes};
   }

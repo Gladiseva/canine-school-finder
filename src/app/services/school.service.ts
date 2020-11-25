@@ -3,7 +3,8 @@ import {School} from '../interfaces/school';
 import {Observable, of} from 'rxjs';
 import {MessageService} from './message.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
+import {SchoolType} from '../interfaces/school-type';
 
 @Injectable({
   providedIn: 'root'
@@ -28,15 +29,18 @@ export class SchoolService {
       );
   }
 
-  searchSchools(location: string): Observable<School[]> {
+  searchSchools(location: string, selectedSchoolType: SchoolType): Observable<School[]> {
     if (!location.trim()) {
       return of([]);
     }
     return this.http.get<School[]>(`${this.schoolsUrl}/?location=${location}`).pipe(
+      catchError(this.handleError<School[]>('searchSchools', [])),
+      map(schools => schools
+        .filter(school => selectedSchoolType.name === 'All' ? true : school.sortOfTraining.includes(selectedSchoolType.name))
+      ),
       tap(x => x.length ?
-        this.log(`found schools matching "${location}"`) :
-        this.log(`no schools matching "${location}"`)),
-      catchError(this.handleError<School[]>('searchSchools', []))
+        this.log(`found schools matching "${location}" and ` + selectedSchoolType.name) :
+        this.log(`no schools matching "${location}" and ` + selectedSchoolType.name)),
     );
   }
 
