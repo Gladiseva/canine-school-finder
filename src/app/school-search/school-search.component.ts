@@ -79,10 +79,11 @@ export class SchoolSearchComponent implements OnInit, OnDestroy {
       .subscribe(types => this.schoolTypes = types);
   }
 
-  updateSelectedSchoolType(schoolType: SchoolType): void {
+  searchSchoolBySchoolType(schoolType: SchoolType): void {
     this.schoolTypes.forEach(type => type.state = false);
     schoolType.state = !schoolType.state;
     this.selectedSchoolType = schoolType;
+    this.search();
   }
 
   getSelectedSchoolType(): SchoolType {

@@ -5,10 +5,7 @@
       <mat-form-field class="example-full-width">
         <mat-label><h3 class="mat-h3">Location</h3></mat-label>
         <input [(ngModel)]="term" matInput placeholder="Ex. Zurich" value="Bern" [formControl]="control"
-               [matAutocomplete]="auto">
-        <button mat-button matSuffix (click)="search()">
-          <mat-icon>search</mat-icon>
-        </button>
+               [matAutocomplete]="auto" (ngModelChange)="search()">
       </mat-form-field>
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let street of filteredLocations | async" [value]="street">
@@ -17,7 +14,7 @@
       </mat-autocomplete>
       <mat-chip-list multiple id="chipList" [selectable]="true">
         <mat-chip *ngFor="let schoolType of schoolTypes" [selected]="schoolType.state"
-                  (click)=updateSelectedSchoolType(schoolType)>
+                  (click)=searchSchoolBySchoolType(schoolType)>
           {{schoolType.name}}
         </mat-chip>
       </mat-chip-list>
